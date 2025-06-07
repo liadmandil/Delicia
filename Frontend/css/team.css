@@ -1,0 +1,360 @@
+:root {
+  --primary-color: #000000;
+  --secondary-color: #666666;
+  --background-color: #f8f9fa;
+  --card-background: #ffffff;
+  --text-color: #333;
+  --light-text-color: #f1f1f1;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --hover-shadow-color: rgba(0, 0, 0, 0.2);
+  --border-radius: 15px;
+  --transition-speed: 0.3s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-header {
+  background-color: var(--primary-color);
+  color: var(--light-text-color);
+  padding: 1rem 2rem;
+  text-align: center;
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+#main-content {
+  flex-grow: 1;
+  padding-top: 110px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.member-card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  overflow: hidden;
+  text-align: center;
+  transition: transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.member-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px var(--hover-shadow-color);
+}
+
+.member-card .img-container {
+  width: 100%;
+  aspect-ratio: 1 / 1.5;
+  overflow: hidden;
+  background-color: #eee;
+}
+
+.member-card .card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.member-card .card-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.member-card h3 {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.member-card p {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.member-card .card-button {
+  background-color: var(--primary-color);
+  color: var(--light-text-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: auto;
+}
+
+.member-card .card-button:hover {
+  background-color: #333;
+}
+
+/* Individual Member Page Styles */
+.member-detail-view {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+.member-detail-view .img-container {
+  flex-basis: 40%;
+  text-align: center;
+  aspect-ratio: auto; /* Override card aspect ratio */
+}
+
+.member-detail-view .main-img {
+  max-width: 100%;
+  height: auto;
+  max-height: 450px;
+  border-radius: var(--border-radius);
+  object-fit: cover;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  display: inline-block; /* Allow text-align center to work */
+}
+
+.member-detail-view .text-container {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.member-detail-view h1 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.member-detail-view p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  flex-grow: 1;
+}
+
+.back-button {
+  align-self: flex-start;
+  background-color: var(--secondary-color);
+  color: var(--light-text-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+  font-weight: 400;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+}
+
+footer {
+  background-color: #e9ecef;
+  color: var(--secondary-color);
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .member-detail-view {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .member-detail-view .img-container {
+    text-align: left;
+  }
+
+  .member-detail-view .text-container {
+    text-align: left;
+  }
+
+  .member-detail-view .back-button {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-grid {
+    /* Make cards slightly narrower on very small screens */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem; /* Reduce gap */
+  }
+  #main-content {
+    padding: 1rem; /* Reduce padding on small screens */
+  }
+}
+#navbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  background: none;
+}
+
+/* תפריט ניווט */
+#navbar .nav-items {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+  margin: 10px 0 0 0;
+  position: relative;
+}
+
+#navbar .nav-item {
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  order: 0;
+}
+
+#navbar .nav-item:hover {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+#navbar .logo {
+  background-color: white;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  order: 1;
+}
+
+#navbar .logo img {
+  margin-right: 2px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* כפתור המבורגר */
+#navbar .hamburger {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 25;
+}
+
+/* קווים של ההמבורגר */
+#navbar .hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  margin: 4px 0;
+  transition: all 0.4s ease;
+}
+
+@media (max-width: 480px) {
+  #navbar .hamburger {
+    display: flex;
+    margin-right: 15px;
+  }
+
+  #navbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    position: fixed;
+    top: -10px;
+    left: 0;
+    z-index: 20;
+    background: none;
+  }
+
+  #navbar .nav-items {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background: white;
+    padding: 20px 0;
+    border-radius: 0;
+    gap: 20px;
+  }
+
+  #navbar.open .nav-items {
+    display: flex;
+  }
+  #navbar .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(10px, 11px);
+    background: black;
+  }
+
+  #navbar .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  #navbar .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+    background: black;
+  }
+}

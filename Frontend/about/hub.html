@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Members Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+    <main id="main-content">
+        <nav id="navbar"></nav>
+        <div class="team-grid">
+            <article class="member-card" id="liad">
+                <div class="img-container">
+                    <img src="images/liad.png" alt="Profile picture of Liad Mandil" class="card-img">
+                </div>
+                <div class="card-content">
+                    <h3>Liad Mandil</h3>
+                    <p id="liad-text"></p>
+                    <button onclick="liadSound()" class="card-sound-button">Play Voice</button>
+                    <a href="liad.html" class="card-button">More Info</a>
+                </div>
+            </article>
+
+            <article class="member-card" id="etgar">
+                <div class="img-container">
+                    <img src="images/etgar.png" alt="Profile picture of Etgar Avshalomov" class="card-img">
+                </div>
+                <div class="card-content">
+                    <h3>Etgar Avshalomov</h3>
+                    <p id="etgar-text"></p>
+                    <button onclick="etgarSound()" class="card-sound-button">Play Voice</button>
+                    <a href="etgar.html" class="card-button">More Info</a>
+                </div>
+            </article>
+
+            <article class="member-card" id="ben">
+                <div class="img-container">
+                    <img src="images/ben.png" alt="Profile picture of Ben Gofman" class="card-img">
+                </div>
+                <div class="card-content">
+                    <h3>Ben Gofman</h3>
+                    <p id="ben-text"></p>
+                    <button onclick="benSound()" class="card-sound-button">Play Voice</button>
+                    <a href="ben.html" class="card-button">More Info</a>
+                </div>
+            </article>
+
+            <article class="member-card" id="max">
+                <div class="img-container">
+                    <img src="images/max.png" alt="Profile picture of Maxim Prokopchuk" class="card-img">
+                </div>
+                <div class="card-content">
+                    <h3>Maxim Prokopchuk</h3>
+                    <p id="max-text"></p>
+                    <button onclick="maxSound()" class="card-sound-button">Play Voice</button>
+                    <a href="max.html" class="card-button">More Info</a>
+                </div>
+            </article>
+        </div>
+        <footer>
+            <div class="team-contact">
+                <h3>Contact the team manager</h3>
+                <h4>Etgar Avshalomov - <span id="team-contact-number"></span> - <span id="team-contact-email"></span></h4>
+            </div>
+        </footer>
+    </main>
+    <script src="../js/navbar.js"></script>
+    <script src="hub.js"></script>
+</body>
+</html>
