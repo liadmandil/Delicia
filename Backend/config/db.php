@@ -1,11 +1,12 @@
 <?php
-$host = '127.0.0.1';
-$db   = 'delicia_db';
-$user = 'root';
-$pass = 'Mandil01!!';
+$host    = '127.0.0.1';
+$port    = '3306';
+$db      = 'delicia_db';
+$user    = 'root';
+$pass    = '1234';
 $charset = 'utf8mb4';
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$dsn = "mysql:host={$host};port={$port};dbname={$db};charset={$charset}";
 
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
