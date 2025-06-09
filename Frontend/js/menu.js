@@ -57,7 +57,7 @@ function renderMenu() {
         <h3>${item.name}</h3>
         <p>${item.description}</p>
         <div class="price">₪${item.price}</div>
-        <button data-id="${item.id}">הוסף לסל</button>
+        <button onclick="addToCart(${item.id})" data-id="${item.id}">הוסף לסל</button>
       `;
     grid.appendChild(div);
     div
@@ -71,6 +71,7 @@ function addToCart(id) {
   const item = menuItems.find((i) => i.id === id);
   cart.push(item);
   renderCart();
+  // Fetch to add the item to the cart
 }
 
 // מציג את הסל עם הסכום הכולל
