@@ -31,7 +31,36 @@ switch ($method) {
         break;
 
     case 'GET':
-        // אפשר לשלוף את כל ההזמנות או לפי משתמש מסוים
+        // בדיקת זמינות שולחן לפי תאריך, שעה וכמות אנשים
+        if (isset($_GET['check_availability'])) {
+            if (!isset($_GET['date'], $_GET['time'], $_GET['people'])) {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing parameters: date, time, people"]);
+                exit;
+            }
+
+            $date = $_GET['date'];
+            $time = $_GET['time'];
+            $people = (int) $_GET['people'];
+
+            $availableTable = $service->checkTableAvailability($date, $time, $people);
+
+            if ($availableTable) {
+                echo json_encode([
+                    "available" => true,
+                    "table_id" => $availableTable['id']
+                ]);
+            } else {
+                echo json_encode([
+                    "available" => false,
+                    "message" => "אין שולחן פנוי בזמן המבוקש."
+                ]);
+            }
+
+            exit;
+        }
+
+        // שליפת כל ההזמנות או לפי משתמש מסוים
         $userId = $_GET['user_id'] ?? null;
 
         $result = $userId ? $service->getReservationsByUser($userId)
