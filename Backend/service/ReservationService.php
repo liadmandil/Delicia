@@ -8,7 +8,7 @@ class ReservationService {
         $this->reservationModel = new ReservationModel($db);
     }
 
-    public function createReservation($tableId, $userId, $date, $time) {
+    public function createReservation($tableId, $userId, $date, $time, $people) {
         if ($this->reservationModel->isUserAlreadyBooked($userId, $date, $time)) {
             return ["success" => false, "message" => "User already has a reservation at that time"];
         }
@@ -17,7 +17,7 @@ class ReservationService {
             return ["success" => false, "message" => "Table is already reserved at that time"];
         }
 
-        $success = $this->reservationModel->addReservation($tableId, $userId, $date, $time);
+        $success = $this->reservationModel->addReservation($tableId, $userId, $date, $time, $people);
         return ["success" => $success, "message" => $success ? "Reservation created" : "Failed to create reservation"];
     }
 
@@ -32,4 +32,9 @@ class ReservationService {
     public function deleteReservation($tableId, $userId, $date) {
         return $this->reservationModel->deleteReservation($tableId, $userId, $date);
     }
+
+    public function checkTableAvailability($date, $time, $people) {
+        return $this->reservationModel->findAvailableTable($date, $time, $people);
+    }
+
 }
