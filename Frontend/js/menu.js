@@ -1,23 +1,47 @@
+//const { response } = require("express");
+
 // מבנה של פריטי התפריט
-const menuItems = [
-  { id: 1, name: "סושי קלסי", desc: "6 יחידות סושי מגוונות", price: 45 },
-  { id: 2, name: "רול צמחוני", desc: "אורז, אבוקדו, מלפפון", price: 38 },
-  { id: 3, name: "ראמן עוף", desc: "מרק עדין עם אטריות וביצת עין", price: 55 },
-  {
-    id: 4,
-    name: "וואן טון",
-    desc: "8 וואן טון מטוגנים עם רוטב צ'ילי",
-    price: 42,
-  },
-  { id: 5, name: "המבורגר אסיאתי", desc: "בשר, חמוצים, מיונז קיסו", price: 60 },
-];
+// const menuItems = [
+//   { id: 1, name: "סושי קלסי", desc: "6 יחידות סושי מגוונות", price: 45 },
+//   { id: 2, name: "רול צמחוני", desc: "אורז, אבוקדו, מלפפון", price: 38 },
+//   { id: 3, name: "ראמן עוף", desc: "מרק עדין עם אטריות וביצת עין", price: 55 },
+//   {
+//     id: 4,
+//     name: "וואן טון",
+//     desc: "8 וואן טון מטוגנים עם רוטב צ'ילי",
+//     price: 42,
+//   },
+//   { id: 5, name: "המבורגר אסיאתי", desc: "בשר, חמוצים, מיונז קיסו", price: 60 },
+// ];
+
+let menuItems;
+
+fetch('../Backend/api/menu.php', {
+  method: 'GET',
+})
+.then(response => response.json())
+.then(result => {
+  if (result.success) {
+    console.log("📋 תפריט שהתקבל:", result.data);
+    menuItems = result.data;
+    
+    // Put your code that needs menuItems here
+    renderMenu();
+    
+  } else {
+    console.error("❌ שגיאה:", result.message);
+  }
+})
+.catch(error => {
+  console.error("⚠️ תקלה בחיבור לשרת:", error);
+});
 
 let cart = [];
 
 // אתחול הדף
 function initMenuPage() {
   loadNavBar();
-  renderMenu();
+  //renderMenu();
   renderCart();
 }
 
@@ -31,7 +55,7 @@ function renderMenu() {
     div.className = "menu-item";
     div.innerHTML = `
         <h3>${item.name}</h3>
-        <p>${item.desc}</p>
+        <p>${item.description}</p>
         <div class="price">₪${item.price}</div>
         <button data-id="${item.id}">הוסף לסל</button>
       `;
@@ -55,7 +79,7 @@ function renderCart() {
   ul.innerHTML = "";
   let total = 0;
   cart.forEach((item, idx) => {
-    total += item.price;
+    total += parseInt(item.price);
     const li = document.createElement("li");
     li.textContent = `${item.name} - ₪${item.price}`;
     ul.appendChild(li);
