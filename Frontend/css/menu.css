@@ -10,6 +10,9 @@ body {
   background-attachment: fixed;
 }
 
+ol {
+  color: white;
+}
 /* תפריט Grid */
 .menu-grid {
   display: grid;

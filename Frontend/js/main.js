@@ -86,6 +86,9 @@ function createAboutSection() {
   const aboutContainer = document.createElement("div");
   aboutContainer.classList.add("about-container");
 
+  const listContainer = document.createElement("div");
+  listContainer.classList.add("list-container");
+
   const h1 = document.createElement("h1");
   h1.textContent = "דילסיה - Fine Cusine";
   aboutContainer.appendChild(h1);
@@ -103,7 +106,22 @@ function createAboutSection() {
 `;
 
   aboutContainer.appendChild(p);
+  const ol = document.createElement("ol");
+  ol.style.textAlign = "right";
+  ol.style.marginRight = "45%";
+  const li1 = document.createElement("li");
+  const li2 = document.createElement("li");
+  const li3 = document.createElement("li");
+  li1.innerHTML = "אוכל אסייתי מסורתי";
+  li2.innerHTML = "בר קוקטיילים חדשני";
+  li3.innerHTML = "אוירה ייחודית";
+  ol.appendChild(li1);
+  ol.appendChild(li2);
+  ol.appendChild(li3);
+
+  listContainer.appendChild(ol);
   aboutSection.appendChild(aboutContainer);
+  aboutSection.appendChild(listContainer);
 
   const repoName = "Delicia";
   const contactDetails = document.createElement("div");
@@ -115,7 +133,7 @@ function createAboutSection() {
 
   contactDetails.className = "contact-details";
   const details = document.createElement("p");
-  details.innerHTML = "אל תדבר לסושי, דבר איתנו!<br> יש לכם שאלות? רעיונות למנות חדשות?<br> דברו איתנו!<br>אימייל: info@delicia.co.il<br> טלפון: 03-1234567";
+  details.innerHTML = "אל תדבר לסושי, דבר איתנו!<br> יש לכם שאלות? רעיונות למנות חדשות?<br/> דברו איתנו!<br/><br/>אימייל: info@delicia.co.il<br/> טלפון: 03-1234567";
   contactDetails.appendChild(details);
   aboutSection.appendChild(contactDetails);
 
