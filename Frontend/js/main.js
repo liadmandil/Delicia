@@ -13,10 +13,8 @@ function loadHomePage() {
 
   const heroSlider = createHeroSlider();
   const aboutSection = createAboutSection();
-  const actionSection = createActionSection();
 
   homePage.appendChild(heroSlider);
-  homePage.appendChild(actionSection);
   homePage.appendChild(aboutSection);
 
   container.appendChild(homePage);
@@ -79,7 +77,6 @@ function startHeroSlider() {
 }
 
 function createAboutSection() {
-  
   const aboutSection = document.createElement("div");
   aboutSection.classList.add("about-section");
 
@@ -125,7 +122,7 @@ function createAboutSection() {
 
   const repoName = "Delicia";
   const contactDetails = document.createElement("div");
-  
+
   const logo = document.createElement("div");
   logo.className = "logo";
   logo.innerHTML = `<img src="images/logo.png" alt="דליסיה">`;
@@ -133,50 +130,23 @@ function createAboutSection() {
 
   contactDetails.className = "contact-details";
   const details = document.createElement("p");
-  details.innerHTML = "אל תדבר לסושי, דבר איתנו!<br> יש לכם שאלות? רעיונות למנות חדשות?<br/> דברו איתנו!<br/><br/>אימייל: info@delicia.co.il<br/> טלפון: 03-1234567";
+  details.innerHTML = `
+אל תדבר לסושי, דבר איתנו!<br>
+יש לכם שאלות? רעיונות למנות חדשות?<br/>
+דברו איתנו!<br/><br/>
+אימייל: info@delicia.co.il<br/>
+טלפון: 03-1234567<br/><br/>
+<span style="white-space: nowrap;">
+  <a href="https://maps.app.goo.gl/SRN5jTveNbR9HiVX6" target="_blank" style="margin-right: 15px; color: white; text-decoration: underline;">סניף חיפה</a>
+  <a href="https://www.bing.com/maps?q=150+Dizengoff+St,+Tel+Aviv" target="_blank" style="margin-right: 15px; color: white; text-decoration: underline;">סניף תל אביב</a>
+  <a href="https://www.openstreetmap.org/?#map=18/32.380935/34.869844&layers=N" target="_blank" style="margin-right: 15px; color: white; text-decoration: underline;">סניף עמק חפר</a>
+</span>
+`;
+
   contactDetails.appendChild(details);
   aboutSection.appendChild(contactDetails);
 
   return aboutSection;
-}
-
-function createActionSection() {
-  const actionSection = document.createElement("div");
-  actionSection.classList.add("action-section");
-
-  // 1. טופס הזמנת שולחן
-  const reserveDiv = document.createElement("div");
-  reserveDiv.classList.add("reservation-form-container");
-  reserveDiv.innerHTML = `
-    <form id="reservationForm">
-      <h2>הזמנת שולחן</h2>
-      <input type="text"   name="name"    placeholder="שם מלא"      required>
-      <input type="text"    name="phone"   placeholder="טלפון"      required>
-      <input type="date"   name="date"    required>
-      <input type="time"   name="time"    required>
-      <button type="submit">שגר הזמנה!</button>
-    </form>
-  `;
-  actionSection.appendChild(reserveDiv);
-
-  reserveDiv
-    .querySelector("#reservationForm")
-    .addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const form = e.target;
-      const customerName = form.querySelector('input[name="name"]').value;
-      const customerPhone = form.querySelector('input[name="phone"]').value;
-
-      console.log("Name:", customerName);
-      console.log("Phone:", customerPhone);
-
-      const message = `תודה רבה ${customerName}! ניצור קשר בהקדם במספר ${customerPhone} 😊`;
-
-      reserveDiv.innerHTML = `<p class="thank-you"></p>` + message;
-    });
-
-  return actionSection;
 }
 
 function startHeroSlider() {

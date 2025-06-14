@@ -21,14 +21,15 @@ function loadNavBar() {
   const navItems = [
     { text: "יצירת קשר", href: `${prefix}contact.html` },
     { text: "אלבום תמונות", href: `${prefix}gallery.html` },
-    { text: "תפריטים", href: `${prefix}menu.html` },
+    { text: "תפריטים", href: `${prefix}entry.php` },
     { text: "קצת עלינו", href: `${prefix}about/hub.html` },
+    { text: "צור קשר עם התמיכה", href: `${prefix}ContactUsForm.php` },
   ];
-  
+
   // הוספת הלוגו בראש
   const logoLi = document.createElement("li");
   const logoLink = document.createElement("a");
-  logoLink.href = `${prefix}index.html`;
+  logoLink.href = `${prefix}index.php`;
   const logo = document.createElement("div");
   logo.className = "logo";
   logo.innerHTML = `<img src="${prefix}images/logo.png" alt="דליסיה">`;

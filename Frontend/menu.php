@@ -9,7 +9,7 @@ session_start();
 // --------------------
 // 🔹 2. התחברות למסד הנתונים
 // --------------------
-$conn = new mysqli("localhost", "root", "1234", "delicia_db");
+$conn = new mysqli("localhost", "root", "Zaqwsxcde1", "delicia_db");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -157,7 +157,7 @@ $cartItems = fetchCartItems($conn, $orderId);
 
   <!-- 🔸 העברת נתונים ל-JavaScript -->
   <script>
-    const menuItems = <?= json_encode($menuItems, JSON_UNESCAPED_UNICODE); ?>;
+    let menuItems = <?= json_encode($menuItems, JSON_UNESCAPED_UNICODE); ?>;
     const cartFromDB = <?= json_encode($cartItems, JSON_UNESCAPED_UNICODE); ?>;
     const user_id = <?= json_encode($userId); ?>;
     const user_phone = <?= json_encode(getUserPhone($conn, $userId)); ?>;

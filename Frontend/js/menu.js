@@ -2,19 +2,19 @@ let cart = [];
 
 // ✅ טעינת עגלה מהשרת (הוזרמה מ־PHP מראש)
 cart = Array.isArray(cartFromDB)
-  ? cartFromDB.map(item => ({
+  ? cartFromDB.map((item) => ({
       id: parseInt(item.menu_item_id),
       name: item.name,
       price: parseFloat(item.price),
-      quantity: parseInt(item.quantity)
+      quantity: parseInt(item.quantity),
     }))
   : [];
 
 console.log("🛒 עגלה נטענה מהשרת:", cart);
 
 // ✅ פרטי המשתמש (מוזרמים מ־PHP)
-const userId = typeof user_id !== 'undefined' ? user_id : null;
-const userPhone = typeof user_phone !== 'undefined' ? user_phone : null;
+const userId = typeof user_id !== "undefined" ? user_id : null;
+const userPhone = typeof user_phone !== "undefined" ? user_phone : null;
 
 // אתחול הדף
 function initMenuPage() {
@@ -45,7 +45,9 @@ function renderMenu() {
       <div class="price">₪${item.price}</div>
       <button data-id="${item.id}">הוסף לסל</button>
     `;
-    div.querySelector("button").addEventListener("click", () => addToCart(item.id));
+    div
+      .querySelector("button")
+      .addEventListener("click", () => addToCart(item.id));
     grid.appendChild(div);
   });
 }
@@ -55,7 +57,7 @@ function addToCart(id) {
   const item = menuItems.find((i) => i.id === id);
   if (!item) return;
 
-  const existing = cart.find(i => i.id === id);
+  const existing = cart.find((i) => i.id === id);
   if (existing) {
     existing.quantity++;
   } else {
@@ -140,7 +142,7 @@ function showOrderForm() {
     <form id="orderForm">
       <input type="hidden" name="itemIds" value="${ids}">
       <input type="text" name="name" placeholder="שם מלא" required>
-      <input type="text" name="phone" value="${userPhone || ''}" required>
+      <input type="text" name="phone" value="${userPhone || ""}" required>
       <input type="email" name="email" placeholder="אימייל" required>
       <button type="submit">לתשלום</button>
     </form>

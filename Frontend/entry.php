@@ -3,7 +3,7 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$conn = new mysqli("localhost", "root", "1234", "delicia_db");
+$conn = new mysqli("localhost", "root", "Zaqwsxcde1", "delicia_db");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>כניסה ל־Delicia</title>
-  <link rel="stylesheet" href="/Delicia/Delicia/Frontend/css/menu.css" />
+  <link rel="stylesheet" href="./css/menu.css">
 </head>
 <body>
   <div id="navbar"></div>
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
     <div id="register-form" <?= $showRegister ? '' : 'class="hidden"' ?>>
-      <h3>לא מצאנו אותך... בוא נכיר 😊</h3>
+      <h3 style="color: white;">לא מצאנו אותך... בוא נכיר 😊</h3>
       <form method="post">
         <input type="hidden" name="register_user" value="1">
 
@@ -118,15 +118,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </main>
 
   <style>
-    .hidden { display: none; }
-    input, button { width: 100%; margin: 6px 0; padding: 8px; }
-    form { margin-bottom: 20px; }
+   
+  .hidden { display: none; }
+
+  input, button {
+    width: 100%;
+    margin: 6px 0;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+form {
+  padding: 30px;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.9); /* bold white with slight transparency */
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4); /* subtle shadow for depth */
+}
   </style>
 
   <script>
     const shouldShowRegister = <?= $showRegister ? 'true' : 'false' ?>;
   </script>
-  <script src="/Delicia/Delicia/Frontend/js/navbar.js"></script>
-  <script src="/Delicia/Delicia/Frontend/js/entry.js"></script>
+  <script src="/Delicia/Frontend/js/navbar.js"></script>
+  <script src="/Delicia/Frontend/js/entry.js"></script>
 </body>
 </html>
+
+
