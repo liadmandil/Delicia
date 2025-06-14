@@ -1,29 +1,11 @@
 let cart = [];
 
-// ✅ טעינת עגלה מהשרת (הוזרמה מ־PHP מראש)
-cart = Array.isArray(cartFromDB)
-  ? cartFromDB.map((item) => ({
-      id: parseInt(item.menu_item_id),
-      name: item.name,
-      price: parseFloat(item.price),
-      quantity: parseInt(item.quantity),
-    }))
-  : [];
-
-console.log("🛒 עגלה נטענה מהשרת:", cart);
-
-// ✅ פרטי המשתמש (מוזרמים מ־PHP)
-const userId = typeof user_id !== "undefined" ? user_id : null;
-const userPhone = typeof user_phone !== "undefined" ? user_phone : null;
-
 // אתחול הדף
 function initMenuPage() {
   loadNavBar();
   renderMenu();
   renderCart();
-  console.log("👤 משתמש מחובר:", userId, userPhone);
 }
-
 document.addEventListener("DOMContentLoaded", initMenuPage);
 
 // מציג את פריטי התפריט
@@ -43,118 +25,106 @@ function renderMenu() {
       <h3>${item.name}</h3>
       <p>${item.description}</p>
       <div class="price">₪${item.price}</div>
-      <button data-id="${item.id}">הוסף לסל</button>
+      <button data-id="${item.id}" class="add-btn">הוסף לסל</button>
     `;
-    div
-      .querySelector("button")
-      .addEventListener("click", () => addToCart(item.id));
     grid.appendChild(div);
+  });
+
+  // bind add buttons
+  grid.querySelectorAll(".add-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      addToCart(id);
+    });
   });
 }
 
-// מוסיף פריט לסל + שליחה ל־DB דרך טופס
+// מוסיף פריט לסל (in‑memory)
 function addToCart(id) {
-  const item = menuItems.find((i) => i.id === id);
+  const item = menuItems.find((i) => i.id == id);
   if (!item) return;
 
-  const existing = cart.find((i) => i.id === id);
+
   if (existing) {
     existing.quantity++;
   } else {
     cart.push({ ...item, quantity: 1 });
   }
 
-  // שליחת הטופס לשרת (ללא רענון)
-  const form = document.createElement("form");
-  form.method = "POST";
-  form.action = "./js/update_cart.php"; // נתיב נכון לקובץ
-  form.target = "hiddenFrame";
-
-  form.innerHTML = `
-    <input type="hidden" name="action" value="add">
-    <input type="hidden" name="menu_item_id" value="${id}">
-    <input type="hidden" name="user_id" value="${userId}">
-  `;
-
-  document.body.appendChild(form);
-  form.submit();
-  form.remove();
-
   renderCart();
 }
 
-// מציג את הסל עם כפתור מחיקה
+// מציג את סל הקניות
 function renderCart() {
   const ul = document.querySelector(".cart-items");
   ul.innerHTML = "";
-  let total = 0;
 
+  let total = 0;
   cart.forEach((item) => {
     total += item.price * item.quantity;
     const li = document.createElement("li");
     li.innerHTML = `
       ${item.name} - ₪${item.price} × ${item.quantity}
-      <button onclick="removeFromCart(${item.id})">❌</button>
+      <button data-id="${item.id}" class="remove-btn">❌</button>
     `;
     ul.appendChild(li);
   });
 
-  document.querySelector(".cart-total span").textContent = total;
+  // bind remove buttons
+  ul.querySelectorAll(".remove-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      removeFromCart(id);
+    });
+  });
 
+  document.querySelector(".cart-total span").textContent = total;
   const checkoutBtn = document.querySelector(".checkout-button");
   checkoutBtn.style.display = cart.length ? "block" : "none";
   checkoutBtn.onclick = showOrderForm;
+
+  console.log("cart:", cart);
 }
 
-// מחיקת פריט מהעגלה + מחיקה מה־DB
+// הסרה מהסל (in‑memory)
 function removeFromCart(id) {
-  cart = cart.filter((item) => item.id !== id);
-
-  // טופס נסתר למחיקה מה־DB
-  const form = document.createElement("form");
-  form.method = "POST";
-  form.action = "update_cart.php";
-  form.style.display = "none";
-
-  const idInput = document.createElement("input");
-  idInput.name = "menu_item_id";
-  idInput.value = id;
-  form.appendChild(idInput);
-
-  const actionInput = document.createElement("input");
-  actionInput.name = "action";
-  actionInput.value = "delete";
-  form.appendChild(actionInput);
-
-  document.body.appendChild(form);
-  form.submit();
-
+  cart = cart.filter((item) => item.id != id);
   renderCart();
 }
 
 // טופס סיום הזמנה
 function showOrderForm() {
   const container = document.querySelector(".order-form-container");
-  const ids = cart.map((i) => `${i.id}:${i.quantity}`).join(",");
+  const ids   = cart.map(i => `${i.id}:${i.quantity}`).join(",");
+  const total = cart.reduce((sum, i) => sum + i.price*i.quantity, 0);
 
   container.innerHTML = `
     <h3>סיום הזמנה</h3>
-    <form id="orderForm">
-      <input type="hidden" name="itemIds" value="${ids}">
-      <input type="text" name="name" placeholder="שם מלא" required>
-      <input type="text" name="phone" value="${userPhone || ""}" required>
-      <input type="email" name="email" placeholder="אימייל" required>
+    <form id="orderForm"
+          action=""
+          method="POST"
+          target="hiddenFrame">
+      <input type="hidden" name="itemIds"        value="${ids}">
+      <input type="hidden" name="totalPrice"     value="${total}">
+      <input type="text"   name="name"           placeholder="שם מלא"       required>
+      <input type="email"  name="email"          placeholder="אימייל"        required>
+      <input type="tel"    name="phone" style="text-align: right;" placeholder="טלפון" required>
+      <input type="text"   name="deliveryAddress" placeholder="כתובת"       required>
       <button type="submit">לתשלום</button>
     </form>
   `;
-
   container.style.display = "block";
 
-  document.getElementById("orderForm").addEventListener("submit", (e) => {
-    e.preventDefault();
+  // once the hidden iframe finishes the POST, show the thank-you
+  const iframe = document.querySelector('iframe[name="hiddenFrame"]');
+  iframe.onload = () => {
     container.innerHTML = `<p class="thank-you">
-      תודה לך, ${e.target.name.value}!<br>הזמנתך התקבלה.
+      תודה לך, ${document.querySelector("#orderForm input[name=name]").value}!<br>הזמנתך התקבלה.
     </p>`;
-    console.log("🧾 הזמנה נשלחה:", ids);
-  });
+    cart = [];
+    renderCart();
+    // clear the handler so it only fires once
+    iframe.onload = null;
+  };
 }
+

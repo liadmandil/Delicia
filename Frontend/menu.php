@@ -4,6 +4,8 @@
 // --------------------
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/php-error.log'); // log to local file
 session_start();
 
 // --------------------
@@ -27,97 +29,60 @@ function fetchMenuItems($conn) {
 }
 
 // --------------------
-// 🔹 4. שליפת טלפון לפי user_id
+// 🔹 4. יצירת הזמנה חדשה
 // --------------------
-function getUserPhone($conn, $userId) {
-    if (!$userId) return null;
-    $phone = null;
-    $stmt = $conn->prepare("SELECT phone FROM users WHERE id = ?");
-    $stmt->bind_param("i", $userId);
-    $stmt->execute();
-    $stmt->bind_result($phone);
-    $stmt->fetch();
-    return $phone;
-}
-
-// --------------------
-// 🔹 5. שליפת עגלה לפי order_id
-// --------------------
-function fetchCartItems($conn, $orderId) {
-    $items = [];
-    if (!$orderId) return $items;
-
-    $query = "
-        SELECT c.menu_item_id, c.quantity, m.name, m.price
-        FROM cart c
-        JOIN menu m ON c.menu_item_id = m.id
-        WHERE c.order_id = ?
-    ";
+function createNewOrder($conn, $phone, $name, $email, $totalPrice, $deliveryAddress) {
+    $query = "INSERT INTO orders (phone, name, email, created_at, total_price, delivery_address) VALUES (?, ?, ?, NOW(), ?, ?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $orderId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        $items[] = $row;
+    $stmt->bind_param("sssds", $phone, $name, $email, $totalPrice, $deliveryAddress);
+    if (!$stmt->execute()) {
+        error_log("❌ Failed to insert item $menuItemId for order $orderId: " . $stmt->error);
     }
-    return $items;
+    return $stmt->insert_id;
 }
 
-// --------------------
-// 🔹 6. בדיקה אם יש למשתמש הזמנה פתוחה
-// --------------------
-function findOpenOrder($conn, $userId) {
-    $query = "SELECT id FROM orders WHERE user_id = ? AND status = 'InCart' LIMIT 1";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $userId);
-    $stmt->execute();
-    $stmt->store_result();
-    $orderId = null;
-    $stmt->bind_result($orderId);
-    if ($stmt->fetch()) {
-        return $orderId;
+// ▶ handle the POST from the hidden iframe
+if ($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['phone'])) {
+
+    $phone   =       $_POST['phone'];
+    $name    =       $_POST['name'];
+    $email   =       $_POST['email'];
+    $total   = (float)$_POST['totalPrice'];
+    $address =       $_POST['deliveryAddress'];
+
+    error_log("itemIds: " . $_POST['itemIds']);
+
+    $orderId = createNewOrder($conn, $phone, $name, $email, $total, $address);
+    if (!$orderId) {
+        error_log("❌ createNewOrder failed: " . $conn->error);
+        exit;
     }
-    return null;
-}
 
-// --------------------
-// 🔹 7. יצירת הזמנה חדשה
-// --------------------
-function createNewOrder($conn, $userId) {
-    $query = "INSERT INTO orders (user_id, status) VALUES (?, 'InCart')";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $userId);
-    if ($stmt->execute()) {
-        return $stmt->insert_id;
+    $itemPairs = explode(',', $_POST['itemIds']); // e.g., "55:1,49:1"
+    $stmt = $conn->prepare("INSERT INTO order_items (order_id, menu_item_id, quantity) VALUES (?, ?, ?)");
+
+    if (!$stmt) {
+        error_log("❌ Prepare failed: " . $conn->error);
+        exit;
     }
-    return null;
+
+    foreach ($itemPairs as $pair) {
+        list($menuItemId, $quantity) = explode(':', $pair);
+        $stmt->bind_param("iii", $orderId, $menuItemId, $quantity);
+        if (!$stmt->execute()) {
+            error_log("❌ Insert failed for item $menuItemId: " . $stmt->error);
+        } else {
+            error_log("✅ Inserted item $menuItemId x$quantity into order_items");
+        }
+    }
+    // stop so the iframe stays blank
+    exit;
 }
 
 // --------------------
-// 🔹 8. זיהוי משתמש והזמנה
-// --------------------
-$userId = $_SESSION['user_id'] ?? null;
-if (!$userId) {
-    die("🔒 אין משתמש מחובר.");
-}
-
-// בדוק אם יש ORDER פתוח ב-DB (לא רק ב-SESSION)
-$orderId = $_SESSION['order_id'] ?? findOpenOrder($conn, $userId);
-
-// אם אין – צור חדש
-if (!$orderId) {
-    $orderId = createNewOrder($conn, $userId);
-    echo "<script>console.log('🆕 נוצרה הזמנה חדשה: $orderId');</script>";
-} else {
-    echo "<script>console.log('🔁 הוזנה הזמנה קיימת: $orderId');</script>";
-}
-$_SESSION['order_id'] = $orderId;
-
-// --------------------
-// 🔹 9. שליפת הנתונים בפועל
+// 🔹 5. שליפת הנתונים בפועל
 // --------------------
 $menuItems = fetchMenuItems($conn);
-$cartItems = fetchCartItems($conn, $orderId);
 ?>
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
@@ -140,7 +105,16 @@ $cartItems = fetchCartItems($conn, $orderId);
     <!-- תפריט -->
     <section id="menu-section">
       <h2 class="section-title">התפריט שלנו</h2>
-      <div class="menu-grid"></div>
+      <div class="menu-grid">
+        <?php foreach ($menuItems as $item): ?>
+            <div class="menu-item">
+                <h3><?= htmlspecialchars($item['name'], ENT_QUOTES) ?></h3>
+                <p><?= nl2br(htmlspecialchars($item['description'], ENT_QUOTES)) ?></p>
+                <div class="price">₪<?= number_format($item['price'], 2) ?></div>
+                <button data-id="<?= htmlspecialchars($item['id'], ENT_QUOTES) ?>">הוסף לסל</button>
+            </div>
+        <?php endforeach; ?>
+      </div>
     </section>
 
     <!-- עגלת קניות -->
@@ -157,10 +131,7 @@ $cartItems = fetchCartItems($conn, $orderId);
 
   <!-- 🔸 העברת נתונים ל-JavaScript -->
   <script>
-    let menuItems = <?= json_encode($menuItems, JSON_UNESCAPED_UNICODE); ?>;
-    const cartFromDB = <?= json_encode($cartItems, JSON_UNESCAPED_UNICODE); ?>;
-    const user_id = <?= json_encode($userId); ?>;
-    const user_phone = <?= json_encode(getUserPhone($conn, $userId)); ?>;
+    const menuItems = <?= json_encode($menuItems, JSON_UNESCAPED_UNICODE); ?>;
   </script>
 
   <!-- 🔸 JavaScript -->
