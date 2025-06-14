@@ -1,21 +1,35 @@
 <?php
 session_start();
+function largeGroup($NumOfPepole) {
+  return $NumOfPepole >= 6;
+}
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $fields = ["name", "email", "num"];
+    foreach ($fields as $field) {
+      if (empty($_POST[$field])) {
+        $errors[] = "Missing: $field";
+      }
+    }
     $name = htmlspecialchars($_POST["name"]);
     $email = htmlspecialchars($_POST["email"]);
+    $NumOfPepole = htmlspecialchars($_POST["num"]);
     $date = $_POST["date"];
 
     $today = new DateTime();
     $reservationDate = new DateTime($date);
     $interval = $today->diff($reservationDate);
     $daysLeft = $interval->days;
-
-    if ($reservationDate < $today) {
-        $response = "<p style='color:red;'>התאריך שהוזן עבר. נא לבחור תאריך עתידי.</p>";
+    
+    if(strlen($name) <= 3) {
+      $response = "<h3 style='color:red;'>שם קצר מידי אנא הכנס שם תקין!</h3>";
+    } else if ($reservationDate < $today) {
+      $response = "<p style='color:red;'>התאריך שהוזן עבר. נא לבחור תאריך עתידי.</p>";
+    } else if (largeGroup($NumOfPepole)) {
+      $response = "<h3>תודה $name!</h3><p>נותרו <strong>$daysLeft</strong> ימים להזמנה שלך.</p><p>הרבה אנשים זה הרבה שמחה! שמרנו שולחן גדול 😊</p>";
     } else {
-        $response = "<h3>תודה $name!</h3><p>נותרו <strong>$daysLeft</strong> ימים להזמנה שלך.</p>";
+      $response = "<h3>תודה $name!</h3><p>נותרו <strong>$daysLeft</strong> ימים להזמנה שלך.</p>";
     }
     
     // If this is an AJAX request, return JSON
@@ -135,6 +149,7 @@ if (isset($_SESSION['form_message'])) {
       <form id="reservationForm" action="" method="POST">
         <input type="text" name="name" placeholder="שם מלא" required>
         <input type="email" name="email" placeholder="אימייל" required>
+        <input type="number" name="num" placeholder="כמות אנשים?" required>
         <input type="date" name="date" required>
         <button type="submit">שלח הזמנה</button>
       </form>
@@ -171,9 +186,11 @@ if (isset($_SESSION['form_message'])) {
                         messageDiv.innerHTML = response.message;
                         form.reset(); // Clear the form
                     } catch (error) {
+                        console.log(error);
                         messageDiv.innerHTML = '<p style="color:red;">שגיאה בשליחת הטופס. אנא נסה שוב.</p>';
                     }
                 } else {
+                    console.log(error);
                     messageDiv.innerHTML = '<p style="color:red;">שגיאה בשליחת הטופס. אנא נסה שוב.</p>';
                 }
             }
