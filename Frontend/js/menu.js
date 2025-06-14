@@ -54,6 +54,29 @@ function addToCart(id) {
   renderCart();
 }
 
+// הוספת פריט יחיד לסל
+function increaseQuantity(id) {
+  const existing = cart.find((i) => i.id == id);
+  if (existing) {
+    existing.quantity++;
+    renderCart();
+  }
+}
+
+// הפחתת פריט יחיד מהסל
+function decreaseQuantity(id) {
+  const existing = cart.find((i) => i.id == id);
+  if (existing) {
+    if (existing.quantity > 1) {
+      existing.quantity--;
+    } else {
+      // אם הכמות 1, נסיר את הפריט לגמרי
+      cart = cart.filter((item) => item.id != id);
+    }
+    renderCart();
+  }
+}
+
 // מציג את סל הקניות
 function renderCart() {
   const ul = document.querySelector(".cart-items");
@@ -64,10 +87,34 @@ function renderCart() {
     total += item.price * item.quantity;
     const li = document.createElement("li");
     li.innerHTML = `
-      ${item.name} - ₪${item.price} × ${item.quantity}
-      <button data-id="${item.id}" class="remove-btn">❌</button>
+      <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span>${item.name} - ₪${item.price}</span>
+          <span style="font-weight: bold;">× ${item.quantity}</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 5px;">
+          <button data-id="${item.id}" class="decrease-btn" style="width: 30px; height: 30px; border: 1px solid #ccc; background: #f5f5f5; cursor: pointer;">-</button>
+          <button data-id="${item.id}" class="increase-btn" style="width: 30px; height: 30px; border: 1px solid #ccc; background: #f5f5f5; cursor: pointer;">+</button>
+          <button data-id="${item.id}" class="remove-btn" style="margin-left: 5px;">❌</button>
+        </div>
+      </div>
     `;
     ul.appendChild(li);
+  });
+
+  // bind quantity control buttons
+  ul.querySelectorAll(".increase-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      increaseQuantity(id);
+    });
+  });
+
+  ul.querySelectorAll(".decrease-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      decreaseQuantity(id);
+    });
   });
 
   // bind remove buttons
@@ -127,4 +174,3 @@ function showOrderForm() {
     iframe.onload = null;
   };
 }
-

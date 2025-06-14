@@ -118,13 +118,15 @@ $menuItems = fetchMenuItems($conn);
     </section>
 
     <!-- עגלת קניות -->
-    <aside id="cart-section">
-      <h2 class="section-title">עגלת הזמנות</h2>
-      <ul class="cart-items"></ul>
-      <p class="cart-total">סה"כ: ₪<span>0</span></p>
-      <button class="checkout-button">סיום הזמנה</button>
-      <div class="order-form-container" style="display:none;"></div>
-    </aside>
+    <div class="cart-container">
+      <aside id="cart-section">
+        <h2 class="section-title">עגלת הזמנות</h2>
+        <ul class="cart-items"></ul>
+        <p class="cart-total">סה"כ: ₪<span>0</span></p>
+        <button class="checkout-button">סיום הזמנה</button>
+        <div class="order-form-container" style="display:none;"></div>
+      </aside>
+    </div>
   </main>
   <iframe name="hiddenFrame" style="display: none;"></iframe>
 

@@ -24,6 +24,7 @@ function loadNavBar() {
     { text: "תפריטים", href: `${prefix}menu.php` },
     { text: "קצת עלינו", href: `${prefix}about/hub.html` },
     { text: "צור קשר עם התמיכה", href: `${prefix}ContactUsForm.php` },
+    { text: "השאר חוות דעת", href: `${prefix}review.php` },
   ];
 
   // הוספת הלוגו בראש

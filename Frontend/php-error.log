@@ -41,3 +41,13 @@ Stack trace:
 [14-Jun-2025 14:29:35 UTC] ✅ Inserted item 51 x1 into order_items
 [14-Jun-2025 14:29:35 UTC] ✅ Inserted item 56 x2 into order_items
 [14-Jun-2025 14:29:35 UTC] ✅ Inserted item 55 x2 into order_items
+[14-Jun-2025 15:36:22 UTC] itemIds: 56:2,55:1,51:1,52:1
+[14-Jun-2025 15:36:22 UTC] ✅ Inserted item 56 x2 into order_items
+[14-Jun-2025 15:36:22 UTC] ✅ Inserted item 55 x1 into order_items
+[14-Jun-2025 15:36:22 UTC] ✅ Inserted item 51 x1 into order_items
+[14-Jun-2025 15:36:22 UTC] ✅ Inserted item 52 x1 into order_items
+[14-Jun-2025 16:27:14 UTC] itemIds: 53:2,52:1,54:1,55:2
+[14-Jun-2025 16:27:14 UTC] ✅ Inserted item 53 x2 into order_items
+[14-Jun-2025 16:27:14 UTC] ✅ Inserted item 52 x1 into order_items
+[14-Jun-2025 16:27:14 UTC] ✅ Inserted item 54 x1 into order_items
+[14-Jun-2025 16:27:14 UTC] ✅ Inserted item 55 x2 into order_items
