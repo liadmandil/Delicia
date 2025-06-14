@@ -1,6 +1,8 @@
 <?php
+session_start();
 $message = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = htmlspecialchars($_POST["name"]);
     $email = htmlspecialchars($_POST["email"]);
     $date = $_POST["date"];
@@ -11,10 +13,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $daysLeft = $interval->days;
 
     if ($reservationDate < $today) {
-        $message = "<p style='color:red;'>התאריך שהוזן עבר. נא לבחור תאריך עתידי.</p>";
+        $response = "<p style='color:red;'>התאריך שהוזן עבר. נא לבחור תאריך עתידי.</p>";
     } else {
-        $message = "<h3>תודה $name!</h3><p>נותרו <strong>$daysLeft</strong> ימים להזמנה שלך.</p>";
+        $response = "<h3>תודה $name!</h3><p>נותרו <strong>$daysLeft</strong> ימים להזמנה שלך.</p>";
     }
+    
+    // If this is an AJAX request, return JSON
+    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+        header('Content-Type: application/json');
+        echo json_encode(['message' => $response]);
+        exit;
+    }
+    
+    // Store message in session and redirect to prevent resubmission
+    $_SESSION['form_message'] = $response;
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+}
+
+// Check if there's a message from the session
+if (isset($_SESSION['form_message'])) {
+    $message = $_SESSION['form_message'];
+    unset($_SESSION['form_message']); // Clear the message after displaying
 }
 ?>
 
@@ -100,27 +120,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       margin-top: 20px;
       font-size: 1.2em;
     }
+
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
   </style>
   </head>
   <body>
     <div id="navbar"></div>
-     <div id="container"></div>
+    <div id="container"></div>
     <div class="reservation-form">
-    <h2>הזמן שולחן</h2>
-    <form method="POST">
-      <input type="text" name="name" placeholder="שם מלא" required>
-      <input type="email" name="email" placeholder="אימייל" required>
-      <input type="date" name="date" required>
-      <button type="submit">שלח הזמנה</button>
-    </form>
+      <h2>הזמן שולחן</h2>
+      <form id="reservationForm" action="" method="POST">
+        <input type="text" name="name" placeholder="שם מלא" required>
+        <input type="email" name="email" placeholder="אימייל" required>
+        <input type="date" name="date" required>
+        <button type="submit">שלח הזמנה</button>
+      </form>
 
-    <div class="message">
-      <?php echo $message; ?>
-    </div>
-  </div>  
+      <div class="message" id="messageDiv">
+        <?php echo $message; ?>
+      </div>
+    </div>  
+    
+    <script>
+    document.getElementById('reservationForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent the default form submission
+        
+        const form = this;
+        const messageDiv = document.getElementById('messageDiv');
+        const formData = new FormData(form);
+        
+        // Add loading state
+        form.classList.add('loading');
+        messageDiv.innerHTML = '<p>שולח...</p>';
+        
+        // Create XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', window.location.href, true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                form.classList.remove('loading');
+                
+                if (xhr.status === 200) {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        messageDiv.innerHTML = response.message;
+                        form.reset(); // Clear the form
+                    } catch (error) {
+                        messageDiv.innerHTML = '<p style="color:red;">שגיאה בשליחת הטופס. אנא נסה שוב.</p>';
+                    }
+                } else {
+                    messageDiv.innerHTML = '<p style="color:red;">שגיאה בשליחת הטופס. אנא נסה שוב.</p>';
+                }
+            }
+        };
+        
+        xhr.send(formData);
+    });
+    </script>
+    
     <script src="js/navbar.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
-<style>
-</style>

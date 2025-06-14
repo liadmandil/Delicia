@@ -4,7 +4,7 @@ $host = '127.0.0.1';
 $port = '3306';
 $db = 'delicia_db';
 $user = 'root';
-$pass = 'Zaqwsxcde1';
+$pass = '1234';
 $charset = 'utf8mb4';
 
 $conn = new mysqli($host, $user, $pass, $db);

@@ -21,7 +21,7 @@ function loadNavBar() {
   const navItems = [
     { text: "יצירת קשר", href: `${prefix}contact.html` },
     { text: "אלבום תמונות", href: `${prefix}gallery.html` },
-    { text: "תפריטים", href: `${prefix}entry.php` },
+    { text: "תפריטים", href: `${prefix}menu.php` },
     { text: "קצת עלינו", href: `${prefix}about/hub.html` },
     { text: "צור קשר עם התמיכה", href: `${prefix}ContactUsForm.php` },
   ];

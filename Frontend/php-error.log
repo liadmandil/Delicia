@@ -12,3 +12,32 @@
 [14-Jun-2025 13:53:21 UTC] ✅ Inserted item 52 x1 into order_items
 [14-Jun-2025 13:53:21 UTC] ✅ Inserted item 51 x2 into order_items
 [14-Jun-2025 13:53:21 UTC] ✅ Inserted item 50 x1 into order_items
+[14-Jun-2025 14:25:39 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php:14
+Stack trace:
+#0 C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php(14): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'delicia_db')
+#1 {main}
+  thrown in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php on line 14
+[14-Jun-2025 14:26:08 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php:14
+Stack trace:
+#0 C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php(14): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'delicia_db')
+#1 {main}
+  thrown in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php on line 14
+[14-Jun-2025 14:26:09 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php:14
+Stack trace:
+#0 C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php(14): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'delicia_db')
+#1 {main}
+  thrown in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php on line 14
+[14-Jun-2025 14:26:23 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php:14
+Stack trace:
+#0 C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php(14): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'delicia_db')
+#1 {main}
+  thrown in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php on line 14
+[14-Jun-2025 14:26:24 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php:14
+Stack trace:
+#0 C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php(14): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'delicia_db')
+#1 {main}
+  thrown in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php on line 14
+[14-Jun-2025 14:29:35 UTC] itemIds: 51:1,56:2,55:2
+[14-Jun-2025 14:29:35 UTC] ✅ Inserted item 51 x1 into order_items
+[14-Jun-2025 14:29:35 UTC] ✅ Inserted item 56 x2 into order_items
+[14-Jun-2025 14:29:35 UTC] ✅ Inserted item 55 x2 into order_items
