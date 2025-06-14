@@ -55,6 +55,11 @@ ol {
   background-color: #c03e30;
 }
 
+.cart-container {
+  display: flex;
+  justify-content: center;
+}
+
 /* עגלת קניות */
 #cart-section {
   margin-top: 40px;
@@ -62,6 +67,7 @@ ol {
   padding: 20px;
   border-radius: 10px;
   color: white;
+  min-width: 500px;
   max-width: 360px;
 }
 .cart-items {
