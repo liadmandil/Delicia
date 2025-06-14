@@ -139,7 +139,7 @@ function createAboutSection() {
 <span style="white-space: nowrap;">
   <a href="https://maps.app.goo.gl/SRN5jTveNbR9HiVX6" target="_blank" style="margin-right: 15px; color: white; text-decoration: underline;">סניף חיפה</a>
   <a href="https://www.bing.com/maps?q=150+Dizengoff+St,+Tel+Aviv" target="_blank" style="margin-right: 15px; color: white; text-decoration: underline;">סניף תל אביב</a>
-  <a href="https://www.openstreetmap.org/?#map=18/32.380935/34.869844&layers=N" target="_blank" style="margin-right: 15px; color: white; text-decoration: underline;">סניף עמק חפר</a>
+  <a href="https://www.openstreetmap.org/note/4444204#map=18/32.343721/34.913140&layers=N" target="_blank" style="margin-right: 15px; color: white; text-decoration: underline;">סניף עמק חפר</a>
 </span>
 `;
 

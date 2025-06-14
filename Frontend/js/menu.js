@@ -44,7 +44,7 @@ function addToCart(id) {
   const item = menuItems.find((i) => i.id == id);
   if (!item) return;
 
-
+  const existing = cart.find((i) => i.id == id);
   if (existing) {
     existing.quantity++;
   } else {
