@@ -133,6 +133,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             align-items: center;
             margin-right: 15px;
         }
+        textarea {
+            resize: none;
+        }
     </style>
     <link rel="stylesheet" href="./css/menu.css">
 </head>
@@ -184,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </datalist><br><br>
 
         <label for="comments">תגובות והערות:</label><br>
-        <textarea id="comments" name="comments" rows="4" cols="40" placeholder="מה חשבת על החוויה?"></textarea><br><br>
+        <textarea id="comments" name="comments" rows="5" cols="40" placeholder="מה חשבת על החוויה?"></textarea><br><br>
 
         <label for="file-upload">העלה תמונה או מסמך:</label><br>
         <input type="file" id="file-upload" name="file-upload"><br><br>

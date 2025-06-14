@@ -51,6 +51,8 @@ $showEntries = isset($_GET['show']) && $_GET['show'] == '1';
       font-family: Arial, sans-serif;
       padding: 30px;
       background-color: #f2f2f2;
+      font-size: 16px;
+      color: black;
     }
     form {
       margin-top: 100px !important;
@@ -65,6 +67,9 @@ $showEntries = isset($_GET['show']) && $_GET['show'] == '1';
     .form-group {
       margin-bottom: 15px;
     }
+    #showEntriesForm {
+      margin-top: 0px !important;
+    }
     label {
       display: block;
       margin-bottom: 6px;
@@ -74,6 +79,7 @@ $showEntries = isset($_GET['show']) && $_GET['show'] == '1';
       width: 100%;
       padding: 8px;
       box-sizing: border-box;
+      resize: none;
     }
     .submit-btn, .show-btn {
       text-align: center;
@@ -155,7 +161,7 @@ $showEntries = isset($_GET['show']) && $_GET['show'] == '1';
 
 <!-- כפתור להציג את הפניות הקודמות -->
 <div class="show-btn">
-  <form method="GET" action="ContactUsForm.php">
+  <form id="showEntriesForm" method="GET" action="ContactUsForm.php">
     <button type="submit" name="show" value="1">הצג פניות קודמות</button>
   </form>
 </div>
