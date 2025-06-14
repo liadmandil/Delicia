@@ -191,7 +191,7 @@ body {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 2s ease-in-out; 
+  transition: opacity 2s ease-in-out;
   pointer-events: none;
 }
 
@@ -293,19 +293,19 @@ body {
 /* מכולת הטופס */
 /* טופס הזמנת שולחן — רקע חצי־שקוף ופנסי */
 .reservation-form-container {
-  background: rgba(0, 0, 0,); 
-  backdrop-filter: blur(10px);           
+  background: rgba(0, 0, 0);
+  backdrop-filter: blur(10px);
   padding: 24px;
   max-width: 340px;
   width: 100%;
-  color: white;                          
+  color: white;
 }
 
 /* כותרת הטופס */
 .reservation-form-container h2 {
   margin: 0 0 16px;
   font-size: 24px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 /* שדות הקלט */
@@ -355,4 +355,3 @@ body {
   text-align: center;
   line-height: 1.5;
 }
-

@@ -11,7 +11,7 @@ session_start();
 // --------------------
 // 🔹 2. התחברות למסד הנתונים
 // --------------------
-$conn = new mysqli("localhost", "root", "1234", "delicia_db");
+$conn = new mysqli("localhost", "root", "Zaqwsxcde1", "delicia_db");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
