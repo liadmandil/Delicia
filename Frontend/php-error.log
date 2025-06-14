@@ -1,0 +1,14 @@
+[14-Jun-2025 13:26:39 UTC] itemIds: 52:1,51:2,50:1,49:2
+[14-Jun-2025 13:26:39 UTC] ✅ Inserted item 52 x1 into order_items
+[14-Jun-2025 13:26:39 UTC] ✅ Inserted item 51 x2 into order_items
+[14-Jun-2025 13:26:39 UTC] ✅ Inserted item 50 x1 into order_items
+[14-Jun-2025 13:26:39 UTC] ✅ Inserted item 49 x2 into order_items
+[14-Jun-2025 13:52:01 UTC] itemIds: 56:1
+[14-Jun-2025 13:52:01 UTC] ✅ Inserted item 56 x1 into order_items
+[14-Jun-2025 13:52:32 UTC] itemIds: 56:1,55:2
+[14-Jun-2025 13:52:32 UTC] ✅ Inserted item 56 x1 into order_items
+[14-Jun-2025 13:52:32 UTC] ✅ Inserted item 55 x2 into order_items
+[14-Jun-2025 13:53:21 UTC] itemIds: 52:1,51:2,50:1
+[14-Jun-2025 13:53:21 UTC] ✅ Inserted item 52 x1 into order_items
+[14-Jun-2025 13:53:21 UTC] ✅ Inserted item 51 x2 into order_items
+[14-Jun-2025 13:53:21 UTC] ✅ Inserted item 50 x1 into order_items
