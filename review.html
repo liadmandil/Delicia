@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        padding: 30px;
+        background-color: #f2f2f2;
+        }
+        form {
+        margin-top: 150px !important;
+        width: 100%;
+        max-width: 600px;
+        margin: 50px auto 20px auto;
+        background-color: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        .form-group {
+        margin-bottom: 15px;
+        }
+        label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: bold;
+        }
+        input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        }
+        .submit-btn, .show-btn {
+        text-align: center;
+        margin-top: 20px;
+        }
+        button {
+        padding: 10px 25px;
+        font-size: 16px;
+        cursor: pointer;
+        }
+        table {
+        margin: 30px auto;
+        border-collapse: collapse;
+        width: 90%;
+        max-width: 1000px;
+        background: white;
+        direction: rtl;
+        }
+        th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: right;
+        }
+        th {
+        background-color: #f4f4f4;
+        }
+        td {
+        max-width: 300px;        /* רוחב מקסימלי של התא */
+        white-space: normal;     /* מאפשר שבירת שורות */
+        word-wrap: break-word;   /* שובר מילים ארוכות לשורות */
+        overflow-wrap: break-word; /* מוודא שבירת מילים */
+        max-height: 5em;         /* גובה מקסימלי, כ-3-4 שורות */
+        overflow: hidden;        /* מסתיר טקסט מעבר לגובה */
+        }
+        .checkbox-inline {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        textarea {
+            resize: none;
+        }
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h3 {
+            color: #04AA6D;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #04AA6D;
+            padding-bottom: 5px;
+        }
+        
+        /* Color display styling */
+        .color-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .color-display {
+            width: 50px;
+            height: 30px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: #000000;
+        }
+        .color-code {
+            font-weight: bold;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Range input styling to remove gaps */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #04AA6D;
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #04AA6D;
+            cursor: pointer;
+            border: none;
+        }
+        
+        input[type="range"]::-ms-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #04AA6D;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+    <link rel="stylesheet" href="./css/menu.css">
+</head>
+<body dir="rtl">
+    <div id="navbar"></div>
+    <form id="reviewForm" action="" method="POST" enctype="multipart/form-data">
+        <!-- פרטים אישיים -->
+        <h3>פרטים אישיים</h3>
+        <label for="name">שם מלא:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">דוא"ל:</label><br>
+        <input type="email" id="email" name="email" placeholder="example@exmaple.com"><br><br>
+
+        <label for="phone-number">מה מספר הטלפון שלך?</label><br>
+        <input type="tel" id="phone-number" name="phone-number" placeholder="050-123-4567"><br><br>
+
+        <label for="birth-date">מתי יום ההולדת שלך? (לקבלת הטבות וקופונים)</label><br>
+        <input type="date" id="birth-date" name="birth-date"><br><br>
+
+        <label for="city">מאיזו עיר אתה מגיע?</label><br>
+        <input type="text" id="city" name="city" placeholder="תל אביב"><br><br>
+
+        <label for="profession">מה המקצוע שלך?</label><br>
+        <input type="text" id="profession" name="profession" placeholder="מהנדס תוכנה"><br><br>
+
+        <label for="hobby">מה התחביב הראשי שלך?</label><br>
+        <input type="text" id="hobby" name="hobby" placeholder="ספורט, קריאה, מוזיקה"><br><br>
+
+        <!-- פרטי הביקור -->
+        <h3>פרטי הביקור</h3>
+        <label for="visit-time">שעת הביקור:</label><br>
+        <input type="time" id="visit-time" name="visit-time"><br><br>
+
+        <label for="meal-type">סוג ארוחה:</label><br>
+        <select id="meal-type" name="meal-type">
+            <option value="מרק">מרק</option>
+            <option value="סושי">סושי</option>
+            <option value="נודלס">נודלס</option>
+            <option value="קינוחים">קינוחים</option>
+        </select><br><br>
+
+        <label for="favorite-dish">מנה מועדפת:</label><br>
+        <input list="dishes" id="favorite-dish" name="favorite-dish">
+        <datalist id="dishes">
+            <option value="מרק מיסו">
+            <option value="סושי רול">
+            <option value="נודלס מוקפצים">
+            <option value="טירמיסו אסייתי">
+        </datalist><br><br>
+
+        <label for="favorite-password">4 ספרות אחרונות של כרטיס האשראי ממנו בוצעה העסקה:</label><br>
+        <input type="password" id="favorite-password" name="favorite-password" maxlength="4" pattern="[0-9]{4}" placeholder="####"><br><br>
+
+        <!-- דירוגים והערכות -->
+        <h3>דירוגים והערכות</h3>
+        <label for="rating">ציון השירות (1-10):</label><br>
+        <input type="number" id="rating" name="rating" min="1" max="10"><br><br>
+
+        <label for="staff-rating">דרג את הצוות שלנו מ-1 עד 10:</label><br>
+        <div class="range-container">
+            <span>1</span>
+            <input type="range" id="staff-rating" name="staff-rating" min="1" max="10" value="5">
+            <span>10</span>
+            <span class="range-value" id="staff-rating-value">5</span>
+        </div><br><br>
+
+        <label for="improvements[]">מה לשפר? (בחר אופציות):</label><br>
+        
+        <div>
+            <label class="checkbox-inline">
+                <input type="checkbox" name="improvements[]" value="טעם"> טעם
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" name="improvements[]" value="הגשה"> הגשה
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" name="improvements[]" value="שירות"> שירות
+            </label>
+        </div>
+        <br>
+
+        <label for="current-mood">מה המצב רוח שלך כרגע?</label><br>
+        <div class="color-container">
+            <input type="color" id="current-mood" name="current-mood" value="#000000">
+            <div class="color-display" id="color-display"></div>
+            <span class="color-code" id="color-code">#000000</span>
+        </div><br><br>
+
+        <!-- העדפות והתייחסות -->
+        <h3>העדפות והתייחסות</h3>
+        <label for="favorite-restaurant">מה המסעדה המועדפת עליך? הכנס כתובת URL של אתר המסעדה</label><br>
+        <input type="url" id="favorite-restaurant" name="favorite-restaurant" placeholder="https://example.com"><br><br>
+
+        <label for="comments">תגובות והערות:</label><br>
+        <textarea id="comments" name="comments" rows="5" cols="40" placeholder="מה חשבת על החוויה?"></textarea><br><br>
+
+        <label for="file-upload">העלה תמונה או מסמך:</label><br>
+        <input type="file" id="file-upload" name="file-upload"><br><br>
+
+        <!-- תכנון עתידי -->
+        <h3>תכנון עתידי</h3>
+        <label for="next-visit">מתי תרצה להזמין שולחן לביקור הבא?</label><br>
+        <input type="datetime-local" id="next-visit" name="next-visit"><br><br>
+
+        <button type="button" onclick="sendEmail()">שלח משוב</button>
+    </form>
+
+    <script>
+        // הצגת הערך של הסליידר
+        const staffRating = document.getElementById('staff-rating');
+        const staffRatingValue = document.getElementById('staff-rating-value');
+        
+        staffRating.addEventListener('input', function() {
+            staffRatingValue.textContent = this.value;
+        });
+
+        // הצגת הצבע הנבחר
+        const colorInput = document.getElementById('current-mood');
+        const colorDisplay = document.getElementById('color-display');
+        const colorCode = document.getElementById('color-code');
+        
+        colorInput.addEventListener('input', function() {
+            const selectedColor = this.value;
+            colorDisplay.style.backgroundColor = selectedColor;
+            colorCode.textContent = selectedColor;
+        });
+
+        // פונקציה לפתיחת אפליקציית המייל עם חלון אישור
+        function sendEmail() {
+            const userResponse = window.prompt("האם נהנית מחווית מילוי השאלון?");
+            
+            if (userResponse !== null) {
+                window.location.href = 'mailto:info@delicia.co.il';
+                document.write('<h1 style="text-align:center; margin-top:200px;">תודה על חוות הדעת!</h1>');
+            }
+        }
+
+    </script>
+    <script src="js/navbar.js"></script>
+    <script src="js/review.js"></script>
+</body>
+</html>

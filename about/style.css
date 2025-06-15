@@ -1,0 +1,253 @@
+:root {
+    --primary-color: #000000;
+    --secondary-color: #666666;
+    --background-color: #f8f9fa;
+    --card-background: #ffffff;
+    --text-color: #333;
+    --light-text-color: #f1f1f1;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --hover-shadow-color: rgba(0, 0, 0, 0.2);
+    --border-radius: 15px;
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: none !important;
+}
+
+#main-content {
+    flex-grow: 1;
+    padding-top: 2rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1500px;
+    margin: auto;
+    margin-top: 85px;
+}
+
+#navbar .hamburger span {
+  background: black !important;
+}
+
+.member-card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    overflow: hidden;
+    text-align: center;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.member-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px var(--hover-shadow-color);
+}
+
+.member-card .img-container {
+    width: 100%;
+    aspect-ratio: 1 / 1.5;
+    overflow: hidden;
+    background-color: #eee;
+}
+
+.member-card .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.member-card .card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.member-card h3 {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.member-card p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.member-card .card-button {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: auto;
+}
+
+.member-card .card-button:hover {
+    background-color: #333;
+}
+
+.member-card .card-sound-button {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.member-card .card-sound-button:hover {
+    background-color: #333;
+}
+
+
+/* Individual Member Page Styles */
+.member-detail-view {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 2rem auto;
+    margin-top: 5.3rem;
+    padding: 2rem;
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+.member-detail-view .img-container {
+    flex-basis: 40%;
+    text-align: center;
+    aspect-ratio: auto; /* Override card aspect ratio */
+}
+
+.member-detail-view .main-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 450px;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    display: inline-block; /* Allow text-align center to work */
+}
+
+.member-detail-view .text-container {
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.member-detail-view h1 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.member-detail-view p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    flex-grow: 1;
+}
+
+.back-button {
+    align-self: flex-start;
+    background-color: var(--secondary-color);
+    color: var(--light-text-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+    font-weight: 400;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+}
+
+.team-contact {
+    border: 1px solid var(--primary-color);
+    border-radius: 15px;
+    text-align: center;
+    width: 80%;
+}
+
+.member-contact p {
+    margin: 0px;
+}
+
+footer {
+    display: flex;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+/* Responsiveness */
+@media (min-width: 768px) {
+    .member-detail-view {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+     .member-detail-view .img-container {
+        text-align: left;
+    }
+
+     .member-detail-view .text-container {
+        text-align: left;
+     }
+
+     .member-detail-view .back-button {
+         align-self: flex-start;
+     }
+}
+
+@media (max-width: 480px) {
+    .team-grid {
+        /* Make cards fit */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem; /* Reduce gap */
+    }
+    #main-content {
+        padding: 1rem; /* Reduce padding */
+    }
+}

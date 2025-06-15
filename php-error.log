@@ -1,0 +1,59 @@
+[14-Jun-2025 13:26:39 UTC] itemIds: 52:1,51:2,50:1,49:2
+[14-Jun-2025 13:26:39 UTC] ✅ Inserted item 52 x1 into order_items
+[14-Jun-2025 13:26:39 UTC] ✅ Inserted item 51 x2 into order_items
+[14-Jun-2025 13:26:39 UTC] ✅ Inserted item 50 x1 into order_items
+[14-Jun-2025 13:26:39 UTC] ✅ Inserted item 49 x2 into order_items
+[14-Jun-2025 13:52:01 UTC] itemIds: 56:1
+[14-Jun-2025 13:52:01 UTC] ✅ Inserted item 56 x1 into order_items
+[14-Jun-2025 13:52:32 UTC] itemIds: 56:1,55:2
+[14-Jun-2025 13:52:32 UTC] ✅ Inserted item 56 x1 into order_items
+[14-Jun-2025 13:52:32 UTC] ✅ Inserted item 55 x2 into order_items
+[14-Jun-2025 13:53:21 UTC] itemIds: 52:1,51:2,50:1
+[14-Jun-2025 13:53:21 UTC] ✅ Inserted item 52 x1 into order_items
+[14-Jun-2025 13:53:21 UTC] ✅ Inserted item 51 x2 into order_items
+[14-Jun-2025 13:53:21 UTC] ✅ Inserted item 50 x1 into order_items
+[14-Jun-2025 14:25:39 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php:14
+Stack trace:
+#0 C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php(14): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'delicia_db')
+#1 {main}
+  thrown in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php on line 14
+[14-Jun-2025 14:26:08 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php:14
+Stack trace:
+#0 C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php(14): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'delicia_db')
+#1 {main}
+  thrown in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php on line 14
+[14-Jun-2025 14:26:09 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php:14
+Stack trace:
+#0 C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php(14): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'delicia_db')
+#1 {main}
+  thrown in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php on line 14
+[14-Jun-2025 14:26:23 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php:14
+Stack trace:
+#0 C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php(14): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'delicia_db')
+#1 {main}
+  thrown in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php on line 14
+[14-Jun-2025 14:26:24 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php:14
+Stack trace:
+#0 C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php(14): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'delicia_db')
+#1 {main}
+  thrown in C:\Users\Etgar\Desktop\Delicia new repo\Frontend\menu.php on line 14
+[14-Jun-2025 14:29:35 UTC] itemIds: 51:1,56:2,55:2
+[14-Jun-2025 14:29:35 UTC] ✅ Inserted item 51 x1 into order_items
+[14-Jun-2025 14:29:35 UTC] ✅ Inserted item 56 x2 into order_items
+[14-Jun-2025 14:29:35 UTC] ✅ Inserted item 55 x2 into order_items
+[14-Jun-2025 15:36:22 UTC] itemIds: 56:2,55:1,51:1,52:1
+[14-Jun-2025 15:36:22 UTC] ✅ Inserted item 56 x2 into order_items
+[14-Jun-2025 15:36:22 UTC] ✅ Inserted item 55 x1 into order_items
+[14-Jun-2025 15:36:22 UTC] ✅ Inserted item 51 x1 into order_items
+[14-Jun-2025 15:36:22 UTC] ✅ Inserted item 52 x1 into order_items
+[14-Jun-2025 16:27:14 UTC] itemIds: 53:2,52:1,54:1,55:2
+[14-Jun-2025 16:27:14 UTC] ✅ Inserted item 53 x2 into order_items
+[14-Jun-2025 16:27:14 UTC] ✅ Inserted item 52 x1 into order_items
+[14-Jun-2025 16:27:14 UTC] ✅ Inserted item 54 x1 into order_items
+[14-Jun-2025 16:27:14 UTC] ✅ Inserted item 55 x2 into order_items
+[15-Jun-2025 10:27:49 UTC] itemIds: 52:3
+[15-Jun-2025 10:27:49 UTC] ✅ Inserted item 52 x3 into order_items
+[15-Jun-2025 14:55:09 UTC] itemIds: 47:1,46:1,38:1
+[15-Jun-2025 14:55:09 UTC] ✅ Inserted item 47 x1 into order_items
+[15-Jun-2025 14:55:09 UTC] ✅ Inserted item 46 x1 into order_items
+[15-Jun-2025 14:55:09 UTC] ✅ Inserted item 38 x1 into order_items
