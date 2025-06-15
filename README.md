@@ -1,97 +1,211 @@
-# 🍽️ Delicia - מערכת ניהול מסעדה
+# 🍜 דליסיה - Delicia Asian Restaurant
 
-מערכת PHP מבוססת MySQL לניהול תפריט, הזמנות, ועגלות קנייה במסעדה.
+<div align="center">
+  <img src="https://img.shields.io/badge/Restaurant-Asian%20Kitchen-red?style=for-the-badge&logo=food" alt="Restaurant Badge">
+  <img src="https://img.shields.io/badge/Tech-PHP%20%7C%20MySQL%20%7C%20JavaScript-blue?style=for-the-badge" alt="Tech Stack">
+  <img src="https://img.shields.io/badge/Language-Hebrew%20RTL-green?style=for-the-badge" alt="Language">
+</div>
 
----
+## 🌟 About Delicia
 
-## 📁 מבנה קבצים עיקרי
+**דליסיה** is a modern Asian restaurant web application that combines traditional Asian cuisine with a contemporary dining experience. Our platform offers a complete digital restaurant solution with Hebrew RTL support.
 
-| קובץ                             | תיאור                                               |
-| -------------------------------- | --------------------------------------------------- |
-| `config/db.php`                  | התחברות למסד הנתונים                               |
-| `models/OrderModel.php`          | פעולות מול הטבלאות `orders`, `cart`, `menu`        |
-| `models/MenuModel.php`           | פעולות מול טבלת `menu` בלבד                        |
-| `services/OrderService.php`      | לוגיקה עסקית להזמנות (שליפה, הוספה, מחיקה וכו')   |
-| `services/MenuService.php`       | לוגיקה עסקית לתפריט (שליפה, הוספה, מחיקה)         |
-| `controllers/MenuController.php` | שליטה על תפריט - משתמש בשירותים ודגמים            |
-| `controllers/OrderController.php`| שליטה על הזמנות                                     |
-| `api/orders.php`                 | קובץ API מרכזי לכל פעולות על הזמנות                |
-| `api/menu.php`                   | קובץ API מרכזי לכל פעולות על תפריט                 |
-| `test.php`                       | בדיקות מקומיות לתפקוד כולל                         |
+> *"אל תדבר לסושי, דבר איתנו!"* - Don't talk to sushi, talk to us!
 
 ---
 
-## 🗃️ טבלאות במסד הנתונים `delicia_db`
+## 🚀 Features
 
-- `users` – משתמשים רשומים
-- `menu` – פריטי תפריט זמינים
-- `orders` – הזמנות לפי משתמש, כולל מצב (InCart, Confirmed וכו')
-- `cart` – פריטים בעגלה לכל הזמנה
+### 🏠 **Homepage**
+- **Hero Image Slider**: Rotating gallery showcasing restaurant ambiance
+- **Restaurant Information**: Hours, locations, and contact details
+- **Dynamic Content**: Auto-updating promotional content
 
----
+### 🍽️ **Menu System** 
+- **Interactive Menu Display**: Browse our Asian cuisine offerings
+- **Smart Shopping Cart**: Add/remove items with quantity controls
+- **Real-time Price Calculation**: Instant total updates
+- **Order Processing**: Complete order workflow with customer details
 
-## 🌐 REST API – נקודות קצה
+### 📝 **Table Reservations**
+- **Date Validation**: Prevents past-date bookings
+- **Large Group Detection**: Special handling for 6+ people
+- **AJAX Form Submission**: Smooth user experience without page reloads
+- **Countdown Display**: Shows days remaining until reservation
 
-### 🔍 צפייה בהזמנה
-- **URL:** `GET /api/orders.php?action=get&order_id=1`
-- **תיאור:** מחזיר את פרטי ההזמנה + פריטי עגלה
+### 📸 **Photo Gallery**
+- **Restaurant Showcase**: Visual presentation of dishes and atmosphere
+- **Responsive Design**: Optimized viewing on all devices
 
-### ➕ הוספה לעגלה
-- **URL:** `POST /api/orders.php?action=addToCart`
-- **פרמטרים:** `user_id`, `menu_item_id`, `quantity`
+### 💬 **Customer Feedback System**
+- **Comprehensive Review Form**: Multi-section feedback collection
+- **Rich Input Types**: Colors, ranges, file uploads, and more
+- **Email Integration**: Direct communication with management
 
-### ➖ הפחתת כמות ב־1
-- **URL:** `POST /api/orders.php?action=removeOneFromCart`
-- **פרמטרים:** `order_id`, `menu_item_id`
-
-### ❌ מחיקה מלאה מהעגלה
-- **URL:** `POST /api/orders.php?action=deleteFromCart`
-- **פרמטרים:** `order_id`, `menu_item_id`
-
-### 📬 קבלת הזמנה פתוחה למשתמש (או יצירת אחת חדשה)
-- **URL:** `GET /api/orders.php?action=getOrCreateOpenOrder&user_id=1`
-
-### 📜 שליפת כל פריטי התפריט
-- **URL:** `GET /api/menu.php?action=getMenu`
-
-### ➕ הוספת פריט חדש לתפריט
-- **URL:** `POST /api/menu.php?action=add`
-- **פרמטרים:** `name`, `description`, `price`, `available`, `image_url`, `category`
-
-### 🗑️ מחיקת פריט מהתפריט
-- **URL:** `POST /api/menu.php?action=delete`
-- **פרמטרים:** `menu_item_id`
+### 📞 **Support Contact**
+- **Multi-category Support**: Technical, payment, account issues
+- **Database Storage**: All inquiries saved for follow-up
+- **Admin Panel**: View previous customer inquiries
 
 ---
 
-## 🧪 בדיקות עם test.php
+## 🛠️ Technical Stack
 
-קובץ `test.php` מדגים את כל הפעולות בממשק HTML פשוט:
-- שליפת תפריט
-- הוספה ומחיקה מהתפריט
-- הוספת מוצר לעגלה
-- מחיקת מוצר מהעגלה
-- הצגת הזמנות לפי מזהה
-- בדיקת הזמנה פתוחה / יצירת חדשה
+### **Backend**
+- ![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat&logo=php&logoColor=white) **PHP 7.4+**
+- ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white) **MySQL Database**
+- **Session Management** for user state
+- **Prepared Statements** for SQL injection prevention
+
+### **Frontend**
+- ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white) **Semantic HTML5**
+- ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white) **CSS3 with RTL Support**
+- ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) **Vanilla JavaScript**
+- **Responsive Design** for mobile compatibility
+
+### **Database Schema**
+```sql
+Tables:
+├── menu (id, name, description, price)
+├── orders (id, phone, name, email, created_at, total_price, delivery_address)
+├── order_items (order_id, menu_item_id, quantity)
+└── contact_us (id, full_name, email, phone, subject, category, message)
+```
 
 ---
 
-## 🗂️ דוגמת שליפת הזמנה
+## 📁 Project Structure
 
-```json
-{
-  "order": {
-    "id": 1,
-    "user_id": 1,
-    "total_price": 64,
-    "status": "InCart"
-  },
-  "items": [
-    {
-      "menu_item_id": 2,
-      "quantity": 2,
-      "menu_name": "סושי סלמון",
-      "price": 32
-    }
-  ]
-}
+```
+delicia-restaurant/
+├── 📄 index.php              # Homepage with restaurant info
+├── 📄 menu.php               # Interactive menu & ordering
+├── 📄 review.html            # Customer feedback form
+├── 📄 gallery.html           # Photo gallery
+├── 📄 contact.html           # Contact page
+├── 📄 ContactUsForm.php      # Support ticket system
+├── 📁 css/                   # Stylesheets
+│   ├── style.css
+│   ├── menu.css
+│   └── gallery.css
+├── 📁 js/                    # JavaScript modules
+│   ├── main.js              # Homepage functionality
+│   ├── menu.js              # Cart & ordering logic
+│   ├── navbar.js            # Navigation component
+│   └── gallery.js           # Image gallery
+├── 📁 images/               # Restaurant photos & assets
+└── 📁 about/               # Additional pages
+    └── hub.html
+```
+
+---
+
+## 🎯 Key Functionalities
+
+### **Order Management System**
+- Real-time cart updates with local storage
+- Comprehensive order form with validation
+- Database integration for order tracking
+- Hidden iframe submission for seamless UX
+
+### **Reservation System**
+- Smart date validation (no past dates)
+- Large group detection and special messaging
+- Session-based message handling
+- AJAX-powered form submission
+
+### **Multi-language Support**
+- Full Hebrew RTL (Right-to-Left) implementation
+- Unicode UTF-8 support throughout
+- Culturally appropriate UI/UX design
+
+### **Security Features**
+- SQL injection prevention with prepared statements
+- Input sanitization and validation
+- Error logging and debugging capabilities
+- Session management for secure user states
+
+---
+
+## 🔧 Installation & Setup
+
+### **Database Configuration**
+```php
+$conn = new mysqli(
+    "sql211.byethost22.com", 
+    "b22_39125661", 
+    "s@Ts7AP2L.pwPHx", 
+    "b22_39125661_delicia_db"
+);
+```
+---
+
+## 🎨 User Experience Features
+
+### **Visual Design**
+- Modern glassmorphism effects
+- Smooth CSS transitions and animations
+- Professional color scheme
+- Mobile-first responsive design
+
+### **Interactive Elements**
+- Dynamic image sliders with auto-rotation
+- Quantity selectors with +/- buttons
+- Real-time form validation
+- Progress indicators and loading states
+
+### **Accessibility**
+- Semantic HTML structure
+- Keyboard navigation support
+- Screen reader compatibility
+- High contrast color ratios
+
+---
+
+## 📱 Responsive Design
+
+- **Mobile-First Approach**: Optimized for smartphone usage
+- **Tablet Compatibility**: Seamless experience on medium screens
+- **Desktop Enhancement**: Full-featured experience on large displays
+- **Cross-Browser Support**: Compatible with modern browsers
+
+---
+
+## 🔐 Security Considerations
+
+- **Data Sanitization**: All user inputs are properly escaped
+- **SQL Injection Prevention**: Prepared statements throughout
+- **Session Security**: Proper session management
+- **Error Handling**: Comprehensive logging without exposing sensitive data
+
+---
+
+## 🌐 Contact Information
+
+**Restaurant Locations:**
+- 📍 [חיפה - Haifa Branch](https://maps.app.goo.gl/SRN5jTveNbR9HiVX6)
+- 📍 [תל אביב - Tel Aviv Branch](https://www.bing.com/maps?q=150+Dizengoff+St,+Tel+Aviv)
+- 📍 [עמק חפר - Emek Hefer Branch](https://www.openstreetmap.org/note/4444204#map=18/32.343721/34.913140&layers=N)
+
+**Contact Details:**
+- 📧 Email: info@delicia.co.il
+- ☎️ Phone: 03-1234567
+- 🕒 Hours: Sun-Thu 12:00-22:30, Fri 23:00, Sat 23:30
+
+---
+
+## 🏆 Project Highlights
+
+- ✅ **Full-Stack Implementation**: Complete restaurant management system
+- ✅ **Cultural Adaptation**: Native Hebrew RTL interface
+- ✅ **Modern UX/UI**: Contemporary design with smooth interactions
+- ✅ **Database Integration**: Robust data management
+- ✅ **Security-First**: Production-ready security measures
+- ✅ **Mobile-Optimized**: Responsive across all devices
+
+---
+
+<div align="center">
+  <h3>🍣 Built with passion for Asian cuisine and modern web development 🥢</h3>
+  <p><em>© 2024 Delicia Asian Restaurant - All rights reserved</em></p>
+</div>
